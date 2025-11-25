@@ -198,30 +198,6 @@ app.post('/api/user/:id/history/add', async (req, res) => {
     }
 });
 
-import { existsSync } from 'fs';
-
-// ... (reszta importów bez zmian)
-
-// Serve static files from the React app (only if dist exists)
-const distPath = path.join(__dirname, '../dist');
-
-if (existsSync(distPath)) {
-    app.use(express.static(distPath));
-    app.get(/.*/, (req, res) => {
-        res.sendFile(path.join(distPath, 'index.html'));
-    });
-} else {
-    app.get('/', (req, res) => {
-        res.json({
-            status: 'running',
-            message: 'Gym Tracker API is active 🚀',
-            info: 'Frontend should be hosted separately (e.g. on home.pl)'
-        });
-    });
-}
-
-app.listen(PORT, () => {
-    console.log('----------------------------------------');
-    console.log(`🚀 SERVER STARTED on http://localhost:${PORT}`);
-    console.log('----------------------------------------');
+console.log(`🚀 SERVER STARTED on http://localhost:${PORT}`);
+console.log('----------------------------------------');
 });
