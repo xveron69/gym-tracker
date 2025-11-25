@@ -1,21 +1,4 @@
 import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import { existsSync } from 'fs';
-
-dotenv.config();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const app = express();
-const PORT = process.env.PORT || 3001;
-
-app.use(cors());
 app.use(bodyParser.json());
 
 // MongoDB Connection
