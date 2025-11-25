@@ -181,6 +181,8 @@ app.post('/api/user/:id/history/add', async (req, res) => {
     }
 });
 
-console.log(`🚀 SERVER STARTED on http://localhost:${PORT}`);
-console.log('----------------------------------------');
+app.listen(PORT, () => {
+    console.log('----------------------------------------');
+    console.log(`🚀 SERVER STARTED on http://localhost:${PORT}`);
+    console.log('----------------------------------------');
 });
