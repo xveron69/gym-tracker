@@ -5,6 +5,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import { existsSync } from 'fs';
 
 dotenv.config();
 
@@ -197,14 +198,27 @@ app.post('/api/user/:id/history/add', async (req, res) => {
     }
 });
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, '../dist')));
+import { existsSync } from 'fs';
 
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
-app.get(/.*/, (req, res) => {
-    res.sendFile(path.join(__dirname, '../dist/index.html'));
-});
+// ... (reszta importów bez zmian)
+
+// Serve static files from the React app (only if dist exists)
+const distPath = path.join(__dirname, '../dist');
+
+if (existsSync(distPath)) {
+    app.use(express.static(distPath));
+    app.get(/.*/, (req, res) => {
+        res.sendFile(path.join(distPath, 'index.html'));
+    });
+} else {
+    app.get('/', (req, res) => {
+        res.json({
+            status: 'running',
+            message: 'Gym Tracker API is active 🚀',
+            info: 'Frontend should be hosted separately (e.g. on home.pl)'
+        });
+    });
+}
 
 app.listen(PORT, () => {
     console.log('----------------------------------------');
