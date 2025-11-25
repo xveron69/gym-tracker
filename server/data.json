@@ -1,0 +1,295 @@
+{
+  "users": [
+    {
+      "id": "1763909842461",
+      "username": "Veron",
+      "password": "12345",
+      "plans": [
+        {
+          "id": "1763910197334",
+          "name": "123",
+          "exercises": [
+            {
+              "name": "123",
+              "sets": 3,
+              "reps": 10
+            },
+            {
+              "name": "321",
+              "sets": 3,
+              "reps": 10
+            }
+          ]
+        },
+        {
+          "id": "1763914453874",
+          "name": "Wtorek",
+          "exercises": [
+            {
+              "name": "nogi",
+              "sets": 3,
+              "reps": 6
+            },
+            {
+              "name": "biceps",
+              "sets": 4,
+              "reps": 10
+            }
+          ]
+        }
+      ],
+      "history": [
+        {
+          "id": "1763910865097",
+          "date": "2025-11-23T15:14:25.097Z",
+          "planName": "123",
+          "duration": 0,
+          "exercises": [
+            {
+              "name": "123",
+              "sets": [
+                {
+                  "reps": "4",
+                  "weight": "3",
+                  "completed": true
+                },
+                {
+                  "reps": "13",
+                  "weight": "7",
+                  "completed": true
+                },
+                {
+                  "reps": "6",
+                  "weight": "4",
+                  "completed": true
+                }
+              ]
+            },
+            {
+              "name": "321",
+              "sets": [
+                {
+                  "reps": "11",
+                  "weight": "3",
+                  "completed": true
+                },
+                {
+                  "reps": "11",
+                  "weight": "3",
+                  "completed": true
+                },
+                {
+                  "reps": "11",
+                  "weight": "3",
+                  "completed": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "1763914368945",
+          "date": "2025-11-23T16:12:48.945Z",
+          "planName": "123",
+          "duration": 0,
+          "exercises": [
+            {
+              "name": "123",
+              "sets": [
+                {
+                  "reps": "13",
+                  "weight": "7",
+                  "completed": true
+                },
+                {
+                  "reps": "13",
+                  "weight": "7",
+                  "completed": true
+                },
+                {
+                  "reps": "13",
+                  "weight": "7",
+                  "completed": true
+                }
+              ]
+            },
+            {
+              "name": "321",
+              "sets": [
+                {
+                  "reps": "11",
+                  "weight": "3",
+                  "completed": true
+                },
+                {
+                  "reps": "11",
+                  "weight": "3",
+                  "completed": true
+                },
+                {
+                  "reps": "11",
+                  "weight": "3",
+                  "completed": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "1763914408984",
+          "date": "2025-11-23T16:13:28.984Z",
+          "planName": "123",
+          "duration": 0,
+          "exercises": [
+            {
+              "name": "123",
+              "sets": [
+                {
+                  "reps": "14",
+                  "weight": "7",
+                  "completed": true
+                },
+                {
+                  "reps": "14",
+                  "weight": "7",
+                  "completed": true
+                },
+                {
+                  "reps": "14",
+                  "weight": "7",
+                  "completed": true
+                }
+              ]
+            },
+            {
+              "name": "321",
+              "sets": [
+                {
+                  "reps": "10",
+                  "weight": "3",
+                  "completed": true
+                },
+                {
+                  "reps": "10",
+                  "weight": "3",
+                  "completed": true
+                },
+                {
+                  "reps": "10",
+                  "weight": "3",
+                  "completed": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "1763914500352",
+          "date": "2025-11-23T16:15:00.352Z",
+          "planName": "Wtorek",
+          "duration": 0,
+          "exercises": [
+            {
+              "name": "nogi",
+              "sets": [
+                {
+                  "reps": 6,
+                  "weight": "40",
+                  "completed": true
+                },
+                {
+                  "reps": 6,
+                  "weight": "40",
+                  "completed": true
+                },
+                {
+                  "reps": 6,
+                  "weight": "40",
+                  "completed": true
+                }
+              ]
+            },
+            {
+              "name": "biceps",
+              "sets": [
+                {
+                  "reps": 10,
+                  "weight": "10",
+                  "completed": true
+                },
+                {
+                  "reps": 10,
+                  "weight": "10",
+                  "completed": true
+                },
+                {
+                  "reps": 10,
+                  "weight": "10",
+                  "completed": true
+                },
+                {
+                  "reps": 10,
+                  "weight": "10",
+                  "completed": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "1763914633491",
+          "date": "2025-11-23T16:17:13.491Z",
+          "planName": "Wtorek",
+          "duration": 0,
+          "exercises": [
+            {
+              "name": "nogi",
+              "sets": [
+                {
+                  "reps": 6,
+                  "weight": "41",
+                  "completed": true
+                },
+                {
+                  "reps": 6,
+                  "weight": "41",
+                  "completed": true
+                },
+                {
+                  "reps": 6,
+                  "weight": "41",
+                  "completed": true
+                }
+              ]
+            },
+            {
+              "name": "biceps",
+              "sets": [
+                {
+                  "reps": "9",
+                  "weight": "10",
+                  "completed": true
+                },
+                {
+                  "reps": "9",
+                  "weight": "10",
+                  "completed": true
+                },
+                {
+                  "reps": "9",
+                  "weight": "10",
+                  "completed": true
+                },
+                {
+                  "reps": "9",
+                  "weight": "10",
+                  "completed": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
