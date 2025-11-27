@@ -113,7 +113,8 @@ export const ActiveSession = () => {
 
         try {
             console.log('Saving workout for user:', user.id);
-            const saveResponse = await fetch(`/api/user/${user.id}/history/add`, {
+            const apiUrl = import.meta.env.VITE_API_URL || '';
+            const saveResponse = await fetch(`${apiUrl}/api/user/${user.id}/history/add`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newHistoryItem)
@@ -126,13 +127,13 @@ export const ActiveSession = () => {
 
             // Force update local storage with fresh data from server
             // Add timestamp to prevent caching
-            const userResponse = await fetch(`/api/user/${user.id}?t=${Date.now()}`);
+            const userResponse = await fetch(`${apiUrl}/api/user/${user.id}?t=${Date.now()}`);
             const userData = await userResponse.json();
 
             if (userData && !userData.error) {
                 localStorage.setItem('gym_tracker_user', JSON.stringify(userData));
-                // Force reload to ensure all states are reset and fresh data is loaded
-                window.location.href = '/history';
+                // Navigate to history page (client-side routing)
+                navigate('/history');
             } else {
                 console.error('Failed to fetch updated user data');
                 navigate('/history'); // Fallback

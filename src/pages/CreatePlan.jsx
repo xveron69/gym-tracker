@@ -38,7 +38,8 @@ export const CreatePlan = () => {
 
         // Save to backend using new endpoint
         try {
-            await fetch(`/api/user/${user.id}/plans/add`, {
+            const apiUrl = import.meta.env.VITE_API_URL || '';
+            await fetch(`${apiUrl}/api/user/${user.id}/plans/add`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newPlan)

@@ -202,4 +202,18 @@ app.listen(PORT, () => {
     console.log('----------------------------------------');
     console.log(`🚀 SERVER STARTED on http://localhost:${PORT}`);
     console.log('----------------------------------------');
+
+    // Keep-Alive Mechanism for Render.com Free Tier
+    // Pings the server every 14 minutes to prevent sleep (limit is 15 mins)
+    if (process.env.NODE_ENV === 'production' || process.env.RENDER_EXTERNAL_URL) {
+        const SERVER_URL = process.env.RENDER_EXTERNAL_URL || 'https://gym-tracker-api-y7zr.onrender.com';
+        console.log(`🔄 Keep-Alive activated for: ${SERVER_URL}`);
+
+        setInterval(() => {
+            console.log(`[${new Date().toISOString()}] 🔄 Sending Keep-Alive ping...`);
+            fetch(SERVER_URL)
+                .then(res => console.log(`✅ Keep-Alive ping status: ${res.status}`))
+                .catch(err => console.error('❌ Keep-Alive ping failed:', err));
+        }, 14 * 60 * 1000); // 14 minutes
+    }
 });

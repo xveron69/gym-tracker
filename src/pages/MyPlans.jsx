@@ -14,7 +14,8 @@ export const MyPlans = () => {
         if (!window.confirm('Czy na pewno chcesz usunąć ten plan?')) return;
 
         try {
-            await fetch(`/api/user/${user.id}/plans/${planId}`, {
+            const apiUrl = import.meta.env.VITE_API_URL || '';
+            await fetch(`${apiUrl}/api/user/${user.id}/plans/${planId}`, {
                 method: 'DELETE',
             });
             await refreshUser();

@@ -17,7 +17,8 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (username, password) => {
         try {
-            const response = await fetch('/api/login', {
+            const apiUrl = import.meta.env.VITE_API_URL || '';
+            const response = await fetch(`${apiUrl}/api/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password }),
@@ -38,7 +39,8 @@ export const AuthProvider = ({ children }) => {
 
     const register = async (username, password) => {
         try {
-            const response = await fetch('/api/register', {
+            const apiUrl = import.meta.env.VITE_API_URL || '';
+            const response = await fetch(`${apiUrl}/api/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password }),
@@ -65,7 +67,8 @@ export const AuthProvider = ({ children }) => {
     const refreshUser = async () => {
         if (!user?.id) return;
         try {
-            const response = await fetch(`/api/user/${user.id}?t=${Date.now()}`);
+            const apiUrl = import.meta.env.VITE_API_URL || '';
+            const response = await fetch(`${apiUrl}/api/user/${user.id}?t=${Date.now()}`);
             const data = await response.json();
             if (data && !data.error) {
                 setUser(data);

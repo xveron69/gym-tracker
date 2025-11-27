@@ -53,7 +53,8 @@ export const EditPlan = () => {
         };
 
         try {
-            await fetch(`/api/user/${user.id}/plans/${planId}`, {
+            const apiUrl = import.meta.env.VITE_API_URL || '';
+            await fetch(`${apiUrl}/api/user/${user.id}/plans/${planId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(updatedPlan)
