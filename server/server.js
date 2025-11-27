@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { existsSync } from 'fs';
+import bcrypt from 'bcryptjs';
 
 dotenv.config();
 
@@ -57,10 +58,12 @@ app.post('/api/register', async (req, res) => {
             return res.status(400).json({ error: 'User already exists' });
         }
 
+        const hashedPassword = await bcrypt.hash(password, 10);
+
         const newUser = new User({
             id: Date.now().toString(),
             username,
-            password, // In a real app, hash this!
+            password: hashedPassword,
             plans: [],
             history: []
         });
@@ -77,10 +80,15 @@ app.post('/api/register', async (req, res) => {
 app.post('/api/login', async (req, res) => {
     const { username, password } = req.body;
     try {
-        const user = await User.findOne({ username, password });
+        const user = await User.findOne({ username });
         if (user) {
-            const { password, _id, __v, ...safeUser } = user.toObject();
-            res.json({ success: true, user: safeUser });
+            const isMatch = await bcrypt.compare(password, user.password);
+            if (isMatch) {
+                const { password, _id, __v, ...safeUser } = user.toObject();
+                res.json({ success: true, user: safeUser });
+            } else {
+                res.status(401).json({ error: 'Invalid credentials' });
+            }
         } else {
             res.status(401).json({ error: 'Invalid credentials' });
         }
