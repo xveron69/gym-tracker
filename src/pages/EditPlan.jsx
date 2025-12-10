@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
+import { ExerciseSelector } from '../components/ExerciseSelector';
 import { Card } from '../components/ui/Card';
 import { Plus, Trash2, Save, ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -105,10 +106,10 @@ export const EditPlan = () => {
                             </button>
 
                             <div className="flex flex-col gap-3">
-                                <Input
+                                <ExerciseSelector
                                     placeholder="Nazwa ćwiczenia"
                                     value={exercise.name}
-                                    onChange={(e) => updateExercise(index, 'name', e.target.value)}
+                                    onChange={(value) => updateExercise(index, 'name', value)}
                                 />
                                 <div className="flex gap-4">
                                     <Input

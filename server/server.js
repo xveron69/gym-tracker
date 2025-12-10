@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { existsSync } from 'fs';
 import bcrypt from 'bcryptjs';
+import { exercises } from './exercises.js';
 
 dotenv.config();
 
@@ -24,26 +25,72 @@ const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
     console.error('ERROR: MONGODB_URI is not defined in .env file');
-    // We don't exit here to allow the server to start and serve static files,
-    // but API calls will fail.
 } else {
     mongoose.connect(MONGODB_URI)
-        .then(() => console.log('✅ Connected to MongoDB Atlas'))
+        .then(() => {
+            console.log('✅ Connected to MongoDB Atlas');
+            seedExercises();
+        })
         .catch(err => console.error('❌ MongoDB Connection Error:', err));
 }
 
 // Schemas
+const PlanSchema = new mongoose.Schema({
+    id: String,
+    name: String,
+    exercises: Array
+});
+
+const HistorySchema = new mongoose.Schema({
+    id: String,
+    date: String,
+    planName: String,
+    duration: Number,
+    exercises: Array
+});
+
 const UserSchema = new mongoose.Schema({
-    id: { type: String, unique: true, required: true }, // Custom ID from frontend
+    id: { type: String, unique: true, required: true },
     username: { type: String, unique: true, required: true },
     password: { type: String, required: true },
-    plans: { type: Array, default: [] }, // Flexible array for plans
-    history: { type: Array, default: [] } // Flexible array for history
+    plans: [PlanSchema],
+    history: [HistorySchema]
 }, { timestamps: true });
 
+const ExerciseSchema = new mongoose.Schema({
+    name: { type: String, required: true, unique: true },
+    category: String,
+    url: String
+});
+
 const User = mongoose.model('User', UserSchema);
+const Exercise = mongoose.model('Exercise', ExerciseSchema);
+
+// Seed Exercises
+const seedExercises = async () => {
+    try {
+        const count = await Exercise.countDocuments();
+        if (count === 0) {
+            console.log('🌱 Seeding exercises database...');
+            await Exercise.insertMany(exercises);
+            console.log('✅ Exercises seeded successfully!');
+        }
+    } catch (error) {
+        console.error('❌ Error seeding exercises:', error);
+    }
+};
 
 // --- API Routes ---
+
+// Get all exercises
+app.get('/api/exercises', async (req, res) => {
+    try {
+        const allExercises = await Exercise.find().sort({ name: 1 });
+        res.json(allExercises);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch exercises' });
+    }
+});
 
 // Register User
 app.post('/api/register', async (req, res) => {
@@ -205,6 +252,22 @@ app.post('/api/user/:id/history/add', async (req, res) => {
         res.status(500).json({ error: 'Server error' });
     }
 });
+
+// Serve static files from the React app
+// Check if dist folder exists (production mode)
+if (existsSync(path.join(__dirname, '../dist/index.html'))) {
+    app.use(express.static(path.join(__dirname, '../dist')));
+
+    // The "catchall" handler: for any request that doesn't
+    // match one above, send back React's index.html file.
+    app.get(/.*/, (req, res) => {
+        res.sendFile(path.join(__dirname, '../dist/index.html'));
+    });
+} else {
+    app.get('/', (req, res) => {
+        res.json({ message: "Gym Tracker API is active. Frontend not served (dist not found)." });
+    });
+}
 
 app.listen(PORT, () => {
     console.log('----------------------------------------');

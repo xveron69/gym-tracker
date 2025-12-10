@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Card } from '../components/ui/Card';
-import { Play, Plus, Calendar as CalendarIcon, History as HistoryIcon } from 'lucide-react';
+import { Play, Plus, Calendar as CalendarIcon, History as HistoryIcon, BookOpen } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export const Dashboard = () => {
@@ -37,6 +37,13 @@ export const Dashboard = () => {
             path: '/history',
             color: 'from-emerald-500 to-green-500',
             desc: 'Ostatnie treningi'
+        },
+        {
+            title: 'Atlas Ćwiczeń',
+            icon: BookOpen,
+            path: '/library',
+            color: 'from-purple-500 to-indigo-500',
+            desc: 'Baza wiedzy'
         },
     ];
 

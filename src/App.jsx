@@ -15,6 +15,7 @@ import { CalendarPage } from './pages/CalendarPage';
 import { ReportsPage } from './pages/ReportsPage';
 import { MyPlans } from './pages/MyPlans';
 import { EditPlan } from './pages/EditPlan.jsx';
+import ExerciseLibrary from './pages/ExerciseLibrary';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -50,6 +51,7 @@ function App() {
             <Route path="workout/active" element={<ActiveSession />} />
             <Route path="history" element={<History />} />
             <Route path="reports" element={<ReportsPage />} />
+            <Route path="library" element={<ExerciseLibrary />} />
           </Route>
         </Routes>
       </AuthProvider>
